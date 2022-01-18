@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Multiline from './components/TextArea/Multiline';
+import Urlbar from './components/UrlBar/urlbar';
+import SubmitButton from './components/Button/button';
+import { TitleBar } from './components/TitleBar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TitleBar/>
+      <Urlbar/>
+     <Multiline/>
+     <SubmitButton/>
     </div>
   );
 }
