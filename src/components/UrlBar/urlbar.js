@@ -8,11 +8,17 @@ import { GlobalContext } from '../Actions';
 
 const Urlbar=()=>{
 
-    const [key,setKey,,]=React.useContext(GlobalContext)
+    const [key,setKey,,,type]=React.useContext(GlobalContext)
     const urlarea=React.useRef(null)
+
     const copytoClipboard=()=>{
-       
+       if(type==="Data"){
         navigator.clipboard.writeText(`https://unrestapi.herokuapp.com/${key}`);
+       }
+       else{
+        navigator.clipboard.writeText(`https://unrestapi.herokuapp.com/excel/${key}`);
+       }
+        
         
     }
     const handleChange = (event) => {
@@ -29,7 +35,7 @@ const Urlbar=()=>{
           multiline
           rows={1}
           ref={urlarea}
-          value={`https://unrestapi.herokuapp.com/${key}`}
+          value={type==="Data"?`https://unrestapi.herokuapp.com/${key}`:`https://unrestapi.herokuapp.com/excel/${key}`}
           onChange={handleChange}
           disabled={true}
           InputProps={{

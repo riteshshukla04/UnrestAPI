@@ -4,18 +4,34 @@ import axios from 'axios';
 import { GlobalContext } from '../Actions';
 const SubmitButton=(props)=>{
     
-    const [key,,data,]=React.useContext(GlobalContext)
+    const [key,,data,,type,,image,]=React.useContext(GlobalContext)
     const [loading,setLoading]=React.useState(false);
+    
     console.log(data);
     
     const send=async()=>{
         setLoading(true);
-       await axios.post(`https://unrestapi.herokuapp.com/getRequest`,{
+        if(type==="Data"){
+            await axios.post(`https://unrestapi.herokuapp.com/getRequest`,{
            "data":data,
            "key":key
        });
-       setLoading(false);
+      
 
+        }
+        else{
+            const data=new FormData();
+            data.append('file', image);
+            data.append('key', key);
+            await axios.post(`https://unrestapi.herokuapp.com/excel`,data,{
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+        }
+        setLoading(false);   
+       
     }
 
    
